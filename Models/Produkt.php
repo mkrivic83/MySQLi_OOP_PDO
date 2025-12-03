@@ -85,6 +85,18 @@ class Produkt{
         }
     }
 
+    public static function insertForTransaction($naziv,$kolicina,$cijena,$kategorijaid,PDO $db):bool{
+        $sql="INSERT INTO produkti (naziv,kolicina,cijena,kategorijaid)
+        values (:naziv,:kolicina,:cijena,:kategorijaid)";
+        $stmt = $db->prepare($sql);
+
+        return $stmt->execute([
+                ':naziv'=>$naziv,
+                ':kolicina' => $kolicina,
+                ':cijena'=>$cijena,
+                ':kategorijaid'=>$kategorijaid
+        ]);
+    }
 }
 
 ?>

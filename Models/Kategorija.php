@@ -71,6 +71,12 @@ class Kategorija{
             exit;
         }
     }
+
+    public static function insertForTransaction($naziv, PDO $db):int{
+        $stmt=$db->prepare("INSERT INTO kategorije (naziv) values (:naziv)");
+        $stmt->execute([':naziv'=>$naziv]);
+        return $db->lastInsertId();
+    }
     
 }
 
